@@ -6,7 +6,7 @@
   <title>Bocatería Badulaque — Bocadillos y hamburguesas de noche en Mérida</title>
   <meta name="description" content="Bocatería Badulaque, en la plaza de Pizarro de Mérida: bocadillos, hamburguesas, perritos y croquetas con alioli. Abre de martes a domingo desde las 20:30. Pide para llevar por WhatsApp.">
   <meta name="robots" content="noindex, nofollow">
-  <meta name="theme-color" content="#1B1511">
+  <meta name="theme-color" content="#7CC8F0">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
 
   <meta property="og:type" content="website">
@@ -18,7 +18,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Familjen+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@500;700;800;900&family=Courier+Prime:wght@400;700&display=swap">
   <link rel="stylesheet" href="style.css">
   <script>document.documentElement.classList.add('js');</script>
 
@@ -59,11 +59,11 @@
     <div class="wrap site-header__inner">
       <a class="logo" href="#inicio" aria-label="Bocatería Badulaque, inicio">
         <svg class="logo__mark" viewBox="0 0 40 40" aria-hidden="true">
-          <rect width="40" height="40" rx="10" fill="var(--tomate)"/>
-          <path d="M8 21c0-5 5.4-8.5 12-8.5S32 16 32 21z" fill="var(--miga)"/>
-          <path d="M12.5 17.2l2-1.6M18.5 15.6l2-1.4M24.6 16.2l1.8-1.3" stroke="var(--corteza)" stroke-width="1.6" stroke-linecap="round"/>
-          <rect x="8" y="22.4" width="24" height="2.6" rx="1.3" fill="var(--corteza)"/>
-          <path d="M8 26.6h24c0 2.2-2 3.4-4.4 3.4H12.4C10 30 8 28.8 8 26.6z" fill="var(--miga)"/>
+          <rect width="40" height="40" rx="10" fill="var(--rojo)"/>
+          <path d="M8 21c0-5 5.4-8.5 12-8.5S32 16 32 21z" fill="var(--papel)"/>
+          <path d="M12.5 17.2l2-1.6M18.5 15.6l2-1.4M24.6 16.2l1.8-1.3" stroke="var(--tinta)" stroke-width="1.6" stroke-linecap="round"/>
+          <rect x="8" y="22.4" width="24" height="2.6" rx="1.3" fill="var(--tinta)"/>
+          <path d="M8 26.6h24c0 2.2-2 3.4-4.4 3.4H12.4C10 30 8 28.8 8 26.6z" fill="var(--papel)"/>
         </svg>
         <span class="logo__word">Badulaque<small>Bocatería · Mérida</small></span>
       </a>
@@ -79,6 +79,7 @@
   <main id="contenido">
     <!-- ============ Inicio ============ -->
     <section class="hero" id="inicio" data-hero>
+      <div class="nubes" aria-hidden="true"><span></span><span></span><span></span></div>
       <div class="wrap hero__grid">
         <div class="hero__copy">
           <p class="status mono" data-status data-state="closed">
@@ -86,13 +87,13 @@
             <span data-status-text>Abre de martes a domingo a las 20:30</span>
           </p>
           <h1 class="hero__title">
-            <span>Bocatas</span>
-            <span>de noche</span>
-            <span class="hero__title-small">en la plaza de Pizarro</span>
+            <span>El badulaque</span>
+            <span>de los bocatas</span>
+            <span class="hero__title-small">Plaza de Pizarro · Mérida</span>
           </h1>
-          <p class="hero__lead">Bocadillos de pan crujiente, hamburguesas, perritos y croquetas, con el alioli de la casa. Para llevar, en la terraza o en casa con Just Eat.</p>
+          <p class="hero__lead">La tienda de la esquina, pero de bocadillos: mostrador, estanterías llenas y ticket de caja. Bocatas de pan crujiente, hamburguesas, perritos y croquetas con el alioli de la casa, desde las 20:30.</p>
           <div class="hero__actions">
-            <a class="btn btn--primary" href="#carta">Montar mi pedido</a>
+            <a class="btn btn--primary" href="#carta">Pasar a comprar</a>
             <a class="btn btn--ghost" data-tel href="tel:+34622641169">Llamar · <span data-tel-text>622 64 11 69</span></a>
           </div>
           <dl class="hero__facts">
@@ -103,34 +104,67 @@
         </div>
 
         <figure class="hero__art" aria-hidden="true">
-          <svg class="bocata" viewBox="0 0 520 420">
+          <svg class="tienda" viewBox="0 0 600 520">
             <defs>
-              <linearGradient id="g-pan" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#E7A458"/>
-                <stop offset="1" stop-color="#B66A2C"/>
-              </linearGradient>
-              <linearGradient id="g-pan-b" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#C47A3A"/>
-                <stop offset="1" stop-color="#8E4E22"/>
-              </linearGradient>
+              <pattern id="rayas" width="60" height="60" patternUnits="userSpaceOnUse" x="30">
+                <rect width="30" height="60" fill="#FFFDF4"/><rect x="30" width="30" height="60" fill="var(--rojo)"/>
+              </pattern>
             </defs>
-            <ellipse class="bocata__shadow" cx="262" cy="372" rx="210" ry="20"/>
-            <g class="layer layer--base"><path d="M58 300c0-10 8-16 18-16h372c10 0 18 6 18 16 0 34-30 54-66 54H124c-36 0-66-20-66-54z" fill="url(#g-pan-b)"/><path d="M76 290h372" stroke="#F2DFC0" stroke-width="10" stroke-linecap="round"/></g>
-            <g class="layer layer--lechuga"><path d="M60 280c20-14 34 8 54-6s36 10 56-4 36 8 56-4 36 10 56-4 36 8 56-4 36 10 56-2 32 6 46 2l-6 14H66z" fill="#7FA34A"/></g>
-            <g class="layer layer--tomate"><rect x="96" y="250" width="96" height="22" rx="11" fill="var(--tomate)"/><rect x="214" y="248" width="96" height="22" rx="11" fill="var(--tomate)"/><rect x="332" y="250" width="96" height="22" rx="11" fill="var(--tomate)"/></g>
-            <g class="layer layer--lomo"><path d="M74 236c30-18 82-16 120-10s84 10 132 2 92-8 124 6l-4 18H78z" fill="#9B4B32"/><path d="M110 236c40-6 70 0 110 4M262 234c40-4 80-6 150 4" stroke="#C26A4A" stroke-width="4" stroke-linecap="round" fill="none"/></g>
-            <g class="layer layer--queso"><path d="M80 222h364l-18 16-22-6-24 22-20-16-36 10-30-14-34 18-26-16-40 12-28-14-34 10-22-8z" fill="#F2C14E"/></g>
-            <g class="layer layer--alioli"><path d="M110 214c24 8 40-6 64 0s40 10 64 2 44-4 66 2 40 6 62-2 34 0 48 4" stroke="#FFF6E2" stroke-width="10" stroke-linecap="round" fill="none"/></g>
-            <g class="layer layer--top">
-              <path d="M56 212c0-44 74-80 206-80s206 36 206 80c0 6-6 10-14 10H70c-8 0-14-4-14-10z" fill="url(#g-pan)"/>
-              <path d="M118 172l34-20M196 154l36-16M278 150l36-14M358 158l34-16" stroke="#8E4E22" stroke-width="7" stroke-linecap="round"/>
-              <path d="M96 196c50-34 130-46 190-46" stroke="#F6C98A" stroke-width="8" stroke-linecap="round" fill="none" opacity=".55"/>
+            <rect x="0" y="472" width="600" height="48" fill="#C9C1B0" stroke="#1C1B1F" stroke-width="5"/>
+            <path d="M120 472v48M260 472v48M400 472v48M540 472v48" stroke="#1C1B1F" stroke-width="3" opacity=".35"/>
+            <rect x="40" y="128" width="520" height="346" fill="#F6E3B4" stroke="#1C1B1F" stroke-width="5"/>
+            <path d="M60 210h40M90 222h40M500 300h36M520 312h30M60 452h44" stroke="#D9BF85" stroke-width="5" stroke-linecap="round"/>
+            <rect x="14" y="44" width="572" height="96" rx="16" fill="var(--rojo)" stroke="#1C1B1F" stroke-width="5"/>
+            <text x="300" y="116" text-anchor="middle" class="tienda__rotulo">BADULAQUE</text>
+            <path d="M44 92l6 -14 6 14 -14 -9h16zM544 92l6 -14 6 14 -14 -9h16z" fill="var(--amarillo)" stroke="#1C1B1F" stroke-width="2.5" stroke-linejoin="round"/>
+            <path d="M30 138H570V178a15 15 0 0 1 -30 0a15 15 0 0 1 -30 0a15 15 0 0 1 -30 0a15 15 0 0 1 -30 0a15 15 0 0 1 -30 0a15 15 0 0 1 -30 0a15 15 0 0 1 -30 0a15 15 0 0 1 -30 0a15 15 0 0 1 -30 0a15 15 0 0 1 -30 0a15 15 0 0 1 -30 0a15 15 0 0 1 -30 0a15 15 0 0 1 -30 0a15 15 0 0 1 -30 0a15 15 0 0 1 -30 0a15 15 0 0 1 -30 0a15 15 0 0 1 -30 0a15 15 0 0 1 -30 0Z" fill="url(#rayas)" stroke="#1C1B1F" stroke-width="5" stroke-linejoin="round"/>
+            <rect x="74" y="222" width="300" height="214" rx="8" fill="#BFE6F7" stroke="#1C1B1F" stroke-width="5"/>
+            <path d="M84 262h280M84 304h280" stroke="#7A5A3A" stroke-width="6"/>
+            <g stroke="#1C1B1F" stroke-width="2.5">
+              <rect x="94" y="236" width="16" height="24" rx="3" fill="var(--rojo)"/><rect x="114" y="242" width="16" height="18" rx="3" fill="var(--amarillo)"/>
+              <rect x="134" y="236" width="16" height="24" rx="3" fill="var(--verde)"/><rect x="300" y="238" width="22" height="22" rx="4" fill="#FFFDF4"/>
+              <rect x="326" y="234" width="16" height="26" rx="3" fill="var(--rojo)"/><rect x="94" y="280" width="26" height="22" rx="4" fill="var(--amarillo)"/>
+              <rect x="320" y="278" width="16" height="24" rx="3" fill="var(--verde)"/><rect x="340" y="284" width="16" height="18" rx="3" fill="var(--rojo)"/>
+            </g>
+            <path d="M90 236l40 60M330 330l24 -40" stroke="#fff" stroke-width="6" stroke-linecap="round" opacity=".6"/>
+            <g class="mascota" transform="translate(222 328)">
+              <g class="mascota__brazo">
+                <path d="M-64 -4C-84 -14 -96 -30 -100 -48" fill="none" stroke="#1C1B1F" stroke-width="7" stroke-linecap="round"/>
+                <circle cx="-102" cy="-56" r="13" fill="#FFFDF4" stroke="#1C1B1F" stroke-width="3.5"/>
+                <path d="M-110 -66l-4 -8M-102 -69v-9M-94 -66l4 -8" stroke="#1C1B1F" stroke-width="3" stroke-linecap="round"/>
+              </g>
+              <rect x="-68" y="20" width="136" height="26" rx="13" fill="#D98E3F" stroke="#1C1B1F" stroke-width="4"/>
+              <path d="M-72 18c12 -10 20 6 32 -2s20 6 32 -2 20 6 32 -2 20 6 32 -2 14 2 16 4z" fill="#7DB843" stroke="#1C1B1F" stroke-width="3" stroke-linejoin="round"/>
+              <rect x="-64" y="2" width="128" height="12" rx="6" fill="var(--rojo)" stroke="#1C1B1F" stroke-width="3"/>
+              <path d="M-70 -6h140l-10 12-12 -6-12 10-12 -8-14 8-12 -8-14 8-12 -8-12 10-12 -8-14 6z" fill="var(--amarillo)" stroke="#1C1B1F" stroke-width="3" stroke-linejoin="round"/>
+              <path d="M-74 -6C-74 -86 74 -86 74 -6Z" fill="#E9A653" stroke="#1C1B1F" stroke-width="4" stroke-linejoin="round"/>
+              <path d="M-50 -60l6 -3M46 -58l-6 -4M-56 -26l7 -1M52 -24l-7 -2" stroke="#FFF4D6" stroke-width="4" stroke-linecap="round"/>
+              <g class="mascota__ojos">
+                <circle cx="-20" cy="-44" r="14" fill="#FFFDF4" stroke="#1C1B1F" stroke-width="3"/>
+                <circle cx="20" cy="-44" r="14" fill="#FFFDF4" stroke="#1C1B1F" stroke-width="3"/>
+                <circle cx="-15" cy="-42" r="4.5" fill="#1C1B1F"/><circle cx="25" cy="-42" r="4.5" fill="#1C1B1F"/>
+              </g>
+              <path d="M-16 -22Q2 -8 20 -22" fill="none" stroke="#1C1B1F" stroke-width="3.5" stroke-linecap="round"/>
+              <path d="M-30 -66l4 -22h52l4 22z" fill="#FFFDF4" stroke="#1C1B1F" stroke-width="3" stroke-linejoin="round"/>
+              <path d="M-28 -76h56" stroke="var(--rojo)" stroke-width="5"/>
+            </g>
+            <rect x="74" y="374" width="300" height="62" fill="var(--verde)" stroke="#1C1B1F" stroke-width="5"/>
+            <path d="M74 390h300" stroke="var(--amarillo)" stroke-width="6"/>
+            <g stroke="#1C1B1F" stroke-width="3" stroke-linejoin="round">
+              <rect x="296" y="340" width="56" height="34" rx="4" fill="#9AA3AD"/>
+              <rect x="304" y="328" width="40" height="16" rx="3" fill="#2B2D2F"/>
+              <path d="M300 352h48M300 362h48" stroke-width="2"/>
+            </g>
+            <text x="324" y="341" text-anchor="middle" class="tienda__caja">4,50</text>
+            <rect x="410" y="222" width="120" height="252" rx="6" fill="var(--verde)" stroke="#1C1B1F" stroke-width="5"/>
+            <rect x="428" y="240" width="84" height="110" rx="4" fill="#BFE6F7" stroke="#1C1B1F" stroke-width="4"/>
+            <circle cx="514" cy="402" r="7" fill="var(--amarillo)" stroke="#1C1B1F" stroke-width="3"/>
+            <g class="tienda__cartel">
+              <path d="M446 352l24 -18 24 18" fill="none" stroke="#1C1B1F" stroke-width="2.5"/>
+              <rect x="432" y="352" width="76" height="32" rx="4" fill="#FFFDF4" stroke="#1C1B1F" stroke-width="3"/>
+              <text x="470" y="374" text-anchor="middle" class="tienda__abierto">ABIERTO</text>
             </g>
           </svg>
-          <figcaption class="ticket-tag mono">
-            <span>Nº 017</span>
-            <span>Pl. de Pizarro</span>
-          </figcaption>
         </figure>
       </div>
     </section>
@@ -147,9 +181,9 @@
     <section class="section carta" id="carta" aria-labelledby="carta-title">
       <div class="wrap">
         <div class="section__head">
-          <p class="eyebrow mono">La carta</p>
-          <h2 class="section__title" id="carta-title">Elige, suma y mándalo por WhatsApp</h2>
-          <p class="section__lead">Añade lo que quieras a la comanda. Al enviarla te llega a WhatsApp ya escrita, con la hora a la que pasas a recogerla.</p>
+          <p class="eyebrow mono">Las estanterías</p>
+          <h2 class="section__title" id="carta-title">Coge lo que quieras y pasa por caja</h2>
+          <p class="section__lead">Cada pasillo es una sección de la carta. Mete en la cesta lo que te apetezca y el ticket se manda solo por WhatsApp, con la hora a la que pasas a recogerlo.</p>
         </div>
 
         <div class="carta__grid">
@@ -170,10 +204,10 @@
           <aside class="comanda" data-comanda aria-labelledby="comanda-title">
             <div class="comanda__paper">
               <header class="comanda__head mono">
-                <p id="comanda-title">Comanda</p>
+                <p id="comanda-title">Ticket de caja</p>
                 <p>Badulaque · para llevar</p>
               </header>
-              <p class="comanda__empty" data-empty>Todavía no has añadido nada. Empieza por un bocata.</p>
+              <p class="comanda__empty" data-empty>La cesta está vacía. Date una vuelta por los pasillos.</p>
               <ul class="comanda__lines" data-lines></ul>
               <div class="comanda__total mono">
                 <span>Total aprox.</span>
@@ -189,8 +223,9 @@
                   <select name="hora" data-hora></select>
                 </label>
               </div>
-              <button type="button" class="btn btn--primary btn--block" data-send disabled>Enviar comanda por WhatsApp</button>
-              <button type="button" class="comanda__clear mono" data-clear hidden>Vaciar</button>
+              <button type="button" class="btn btn--primary btn--block" data-send disabled>Pagar en caja (por WhatsApp)</button>
+              <button type="button" class="comanda__clear mono" data-clear hidden>Vaciar la cesta</button>
+              <p class="comanda__gracias mono">*** ¡Gracias, vuelva pronto! ***</p>
             </div>
           </aside>
         </div>
@@ -201,7 +236,7 @@
     <section class="section opiniones" id="opiniones" aria-labelledby="op-title">
       <div class="wrap opiniones__grid">
         <div class="opiniones__score">
-          <p class="eyebrow mono">Lo que dicen en Google</p>
+          <p class="eyebrow mono">Lo que dicen los clientes</p>
           <p class="score"><span class="num">4,3</span><small>/5</small></p>
           <p class="score__meta">131 opiniones · puesto 95 de 358 sitios para comer en Mérida en GastroRanking</p>
         </div>
@@ -266,7 +301,7 @@
     <!-- ============ Dudas ============ -->
     <section class="section faq" aria-labelledby="faq-title">
       <div class="wrap faq__grid">
-        <h2 class="section__title" id="faq-title">Dudas rápidas</h2>
+        <h2 class="section__title" id="faq-title">Preguntas en el mostrador</h2>
         <div class="faq__list">
           <details>
             <summary>¿Lleváis a domicilio?</summary>
@@ -291,7 +326,7 @@
 
   <footer class="site-footer">
     <div class="wrap site-footer__top">
-      <p class="site-footer__big">Badulaque</p>
+      <p class="site-footer__big">¡Gracias, vuelva pronto!</p>
       <div class="site-footer__cols">
         <p>Pl. de Pizarro, 17<br>06800 Mérida (Badajoz)</p>
         <p><a data-tel href="tel:+34622641169" data-tel-text>622 64 11 69</a><br><a href="https://www.instagram.com/bocateriabadulaque/" target="_blank" rel="noopener">@bocateriabadulaque</a></p>
@@ -306,7 +341,7 @@
 
   <!-- Barra de pedido en móvil -->
   <a class="mobile-cta" href="#carta" data-mobile-cta>
-    <span><strong data-mobile-count>0</strong> en la comanda</span>
+    <span><strong data-mobile-count>0</strong> en la cesta</span>
     <span class="num" data-mobile-total>Ver carta</span>
   </a>
 

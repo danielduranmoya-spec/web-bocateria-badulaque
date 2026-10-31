@@ -17,11 +17,17 @@ web-bocateria-badulaque/
 
 ## Secciones
 
-1. **Inicio**: «Bocatas de noche en la plaza de Pizarro», aviso «Abierto ahora / Cerrado» en directo, nota de Google (4,3 · 131 reseñas) y un bocadillo ilustrado que se monta capa a capa al cargar.
-2. **La carta + comanda**: cinco pestañas (bocadillos, hamburguesas, perritos, para picar, peques y bebidas). Cada plato tiene un botón «+» que lo suma a una comanda con forma de ticket; con nombre y hora de recogida, se envía ya escrita por WhatsApp. En móvil, una barra fija muestra cuántas cosas llevas y el total.
-3. **Opiniones**: extractos reales de reseñas y las etiquetas de la ficha de Google.
+1. **Inicio**: «El badulaque de los bocatas», cielo con nubes y la fachada de la tienda dibujada (toldo de rayas, escaparate, mostrador y caja registradora). Detrás del mostrador saluda la mascota, un bocadillo con gorro de dependiente. El cartel de la puerta y el aviso de arriba cambian entre «Abierto» y «Cerrado» según la hora real.
+2. **Las estanterías (carta + ticket de caja)**: cada sección es un «pasillo» (bocadillos, hamburguesas, perritos, para picar, peques y bebidas). Los platos están en baldas con etiqueta de precio y un botón «+». La cesta sale como un ticket de caja que se envía ya escrito por WhatsApp, con nombre y hora de recogida, y termina en «¡Gracias, vuelva pronto!». En móvil, una barra fija muestra cuántas cosas llevas y el total.
+3. **Opiniones**: extractos reales de reseñas en bocadillos de cómic y las etiquetas de la ficha de Google.
 4. **Horario y dónde**: horario con el día de hoy marcado, WhatsApp, llamar, Just Eat y mapa (solo si se acepta).
 5. **Dudas rápidas** y pie.
+
+## Estética
+
+Inspirada en la tienda de barrio de los dibujos animados, porque el nombre del local es un guiño a ella: trazo negro grueso, colores planos (cielo, amarillo, rojo, verde), sombras sólidas y botones «de goma». Tipografías Lilita One (títulos), Nunito (texto) y Courier Prime (tickets y etiquetas).
+
+No usa personajes, logotipos ni imágenes de *Los Simpson*: están protegidos por derechos de autor y marca de Disney, y en la web de un negocio real pueden acabar en una reclamación o en la retirada de la web. La mascota y la fachada son dibujos propios hechos en SVG dentro de `index.html`.
 
 ## Fuentes de los datos (octubre 2026)
 

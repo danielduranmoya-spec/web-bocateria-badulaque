@@ -245,7 +245,7 @@
 
     tabsWrap.innerHTML = ORDEN.map(function (k, i) {
       return '<button type="button" class="tab" role="tab" id="tab-' + k + '" aria-controls="panel-carta" data-tab="' + k + '" aria-selected="' + (i === 0) + '" tabindex="' + (i === 0 ? 0 : -1) + '">' +
-        CARTA[k].nombre + '<span class="num">' + CARTA[k].platos.length + '</span></button>';
+        '<span class="tab__pasillo">Pasillo ' + (i + 1) + '</span>' + CARTA[k].nombre + '</button>';
     }).join('');
     panel.id = 'panel-carta';
     var tabs = $$('.tab', tabsWrap);
@@ -353,6 +353,8 @@
       var st = hoursStatus(now);
       status.setAttribute('data-state', st.open ? 'open' : 'closed');
       text.textContent = st.text;
+      var cartel = $('.tienda__abierto');
+      if (cartel) cartel.textContent = st.open ? 'ABIERTO' : 'CERRADO';
       $$('.hours tr[data-days]').forEach(function (tr) {
         var days = tr.getAttribute('data-days').split(',').map(Number);
         tr.classList.toggle('is-today', days.indexOf(now.day) !== -1);
