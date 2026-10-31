@@ -67,12 +67,30 @@
         </svg>
         <span class="logo__word">Badulaque<small>Bocatería · Mérida</small></span>
       </a>
-      <nav class="site-nav" aria-label="Secciones">
-        <a href="#carta">Carta</a>
-        <a href="#opiniones">Opiniones</a>
-        <a href="#horario">Horario</a>
+      <nav class="menu" data-menu aria-label="Menú principal">
+        <button type="button" class="menu__btn" aria-expanded="false" aria-controls="menu-panel" data-menu-btn>
+          <span class="menu__icon" aria-hidden="true"><span></span><span></span><span></span></span>
+          Menú
+        </button>
+        <div class="menu__panel" id="menu-panel" data-menu-panel hidden>
+          <p class="menu__title mono">La carta</p>
+          <ul class="menu__pasillos">
+            <li><a href="#carta" data-goto-tab="bocadillos"><span class="mono">Pasillo 1</span>Bocadillos</a></li>
+            <li><a href="#carta" data-goto-tab="hamburguesas"><span class="mono">Pasillo 2</span>Hamburguesas</a></li>
+            <li><a href="#carta" data-goto-tab="perritos"><span class="mono">Pasillo 3</span>Perritos</a></li>
+            <li><a href="#carta" data-goto-tab="picar"><span class="mono">Pasillo 4</span>Para picar</a></li>
+            <li><a href="#carta" data-goto-tab="peques"><span class="mono">Pasillo 5</span>Peques y bebidas</a></li>
+          </ul>
+          <ul class="menu__links">
+            <li><a href="#opiniones">Opiniones</a></li>
+            <li><a href="#horario">Horario</a></li>
+            <li><a href="#como-llegar">Cómo llegar</a></li>
+            <li><a href="#preguntas">Preguntas</a></li>
+          </ul>
+          <a class="btn btn--primary btn--block" data-tel href="tel:+34622641169">Llamar · <span data-tel-text>622 64 11 69</span></a>
+        </div>
       </nav>
-      <a class="btn btn--primary btn--small" data-tel href="tel:+34622641169">Llamar para pedir</a>
+      <a class="btn btn--primary btn--small header-call" data-tel href="tel:+34622641169">Llamar para pedir</a>
     </div>
   </header>
 
@@ -215,18 +233,25 @@
           </div>
         </div>
 
+        <div class="ruta" id="como-llegar">
         <div class="map" data-map>
+          <div class="map__canvas" data-map-canvas></div>
           <div class="map__placeholder" data-map-placeholder>
-            <p>El mapa es de OpenStreetMap y solo se carga si lo aceptas.</p>
+            <p>Apu te enseña el camino desde la plaza de España. El mapa es de OpenStreetMap y solo se carga si lo aceptas.</p>
             <button type="button" class="btn btn--ghost btn--small" data-map-load>Cargar mapa</button>
-            <a class="map__link mono" href="https://www.openstreetmap.org/search?query=Plaza%20de%20Pizarro%2017%20M%C3%A9rida" target="_blank" rel="noopener">Abrir en OpenStreetMap ↗</a>
+            <a class="map__link mono" href="https://www.openstreetmap.org/directions?engine=fossgis_osrm_foot&amp;route=38.91616%2C-6.34614%3B38.91361%2C-6.34153" target="_blank" rel="noopener">Ver la ruta en OpenStreetMap ↗</a>
           </div>
+        </div>
+        <div class="ruta__info">
+          <p><strong>Plaza de España → Badulaque</strong><span class="mono">600 m · unos 8 minutos andando</span></p>
+          <button type="button" class="btn btn--ghost btn--small" data-replay hidden>Repetir el paseo</button>
+        </div>
         </div>
       </div>
     </section>
 
     <!-- ============ Dudas ============ -->
-    <section class="section faq" aria-labelledby="faq-title">
+    <section class="section faq" id="preguntas" aria-labelledby="faq-title">
       <div class="wrap faq__grid">
         <div class="faq__head">
           <h2 class="section__title" id="faq-title">Preguntas en el mostrador</h2>

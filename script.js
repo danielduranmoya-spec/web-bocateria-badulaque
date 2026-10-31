@@ -22,7 +22,16 @@
       5: [['20:30', '24:00']],
       6: [['20:30', '24:00']]
     },
-    mapa: 'https://www.openstreetmap.org/export/embed.html?bbox=-6.3480%2C38.9135%2C-6.3410%2C38.9175&layer=mapnik&marker=38.91550%2C-6.34440',
+    // Ruta a pie de la plaza de España al local (OSRM a pie de routing.openstreetmap.de, 603 m)
+    ruta: [
+      [38.916157, -6.346137], [38.916326, -6.345818], [38.916311, -6.345704], [38.916345, -6.345631],
+      [38.916602, -6.345236], [38.916172, -6.344923], [38.915689, -6.344361], [38.915172, -6.343868],
+      [38.915045, -6.343696], [38.914534, -6.343224], [38.914446, -6.343209], [38.913356, -6.341834],
+      [38.913566, -6.341487]
+    ],
+    local: [38.913608, -6.341528],     // Pl. de Pizarro, 17 (ficha de GastroRanking)
+    teselas: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+    duracionPaseo: 9000,               // ms que tarda Apu en llegar
     claveConsentimiento: 'badulaque-consent'
   };
 
@@ -166,6 +175,7 @@
       select(tabs[next].getAttribute('data-tab'));
     });
 
+    seleccionarPasillo = select;
     mark(current);
     swap(current);
   }
@@ -240,26 +250,167 @@
     setInterval(update, 60 * 1000);
   }
 
-  /* ---------- Consentimiento y mapa ---------- */
+  /* ---------- Mapa: Apu va andando de la plaza de España al local ---------- */
+  var mapa = null;
+  var paseo = null;
+
+  function cargarLeaflet(done) {
+    if (window.L) { done(); return; }
+    var css = document.createElement('link');
+    css.rel = 'stylesheet';
+    css.href = 'vendor/leaflet/leaflet.css';
+    document.head.appendChild(css);
+    var s = document.createElement('script');
+    s.src = 'vendor/leaflet/leaflet.js';
+    s.onload = done;
+    document.head.appendChild(s);
+  }
+
+  function icono(html, size, anchor, cls) {
+    return window.L.divIcon({ html: html, className: cls || '', iconSize: size, iconAnchor: anchor });
+  }
+
   function loadMap() {
-    var box = $('[data-map]');
-    if (!box || box.querySelector('iframe')) return;
-    var iframe = document.createElement('iframe');
-    iframe.src = CONFIG.mapa;
-    iframe.title = 'Mapa con la ubicación de Bocatería Badulaque en la plaza de Pizarro, Mérida';
-    iframe.loading = 'lazy';
-    iframe.referrerPolicy = 'no-referrer';
-    box.appendChild(iframe);
+    var canvas = $('[data-map-canvas]');
+    if (!canvas || mapa) return;
     var ph = $('[data-map-placeholder]');
     if (ph) ph.hidden = true;
+    cargarLeaflet(function () {
+      if (mapa) return;
+      var L = window.L;
+      var ruta = CONFIG.ruta;
+      mapa = L.map(canvas, { scrollWheelZoom: false, zoomSnap: 0.25, zoomControl: false });
+      L.control.zoom({ position: 'topright' }).addTo(mapa);
+      L.tileLayer(CONFIG.teselas, {
+        maxZoom: 19,
+        attribution: '© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>'
+      }).addTo(mapa);
+      mapa.fitBounds(ruta, { paddingTopLeft: [40, 70], paddingBottomRight: [40, 90] });
+
+      L.polyline(ruta, { color: '#1C1B1F', weight: 4, opacity: 0.45, dashArray: '2 10', lineCap: 'round' }).addTo(mapa);
+      var rastro = L.polyline([], { color: '#E8412C', weight: 7, opacity: 0.95, lineCap: 'round', lineJoin: 'round' }).addTo(mapa);
+
+      L.marker(ruta[0], {
+        icon: icono('<span>Plaza de España</span>', null, [0, 0], 'pin-texto pin-texto--inicio'),
+        interactive: false, keyboard: false
+      }).addTo(mapa);
+      L.marker(CONFIG.local, {
+        icon: icono('<img src="favicon.svg" alt=""><span>Badulaque</span>', null, [25, 74], 'pin-local'),
+        title: 'Bocatería Badulaque, Pl. de Pizarro 17', alt: 'Bocatería Badulaque'
+      }).addTo(mapa);
+      var apu = L.marker(ruta[0], {
+        icon: icono('<img src="img/apu-cara.jpg" alt="">', [60, 60], [30, 30], 'apu-pin'),
+        title: 'Apu', alt: 'Apu', zIndexOffset: 1000, keyboard: false
+      }).addTo(mapa);
+
+      // distancias acumuladas para avanzar a velocidad constante
+      var acum = [0];
+      for (var i = 1; i < ruta.length; i++) acum.push(acum[i - 1] + mapa.distance(ruta[i - 1], ruta[i]));
+      var total = acum[acum.length - 1];
+
+      function puntoEn(d) {
+        for (var i = 1; i < ruta.length; i++) {
+          if (d <= acum[i]) {
+            var t = (d - acum[i - 1]) / (acum[i] - acum[i - 1] || 1);
+            return { i: i, p: [ruta[i - 1][0] + (ruta[i][0] - ruta[i - 1][0]) * t, ruta[i - 1][1] + (ruta[i][1] - ruta[i - 1][1]) * t] };
+          }
+        }
+        return { i: ruta.length - 1, p: ruta[ruta.length - 1] };
+      }
+
+      function llegar() {
+        var el = apu.getElement();
+        if (el) el.classList.remove('is-walking');
+        apu.setLatLng(ruta[ruta.length - 1]);
+        rastro.setLatLngs(ruta);
+        apu.bindTooltip('¡Gracias, vuelva pronto!', { permanent: true, direction: 'left', offset: [-30, 0], className: 'apu-dice' }).openTooltip();
+        var replay = $('[data-replay]');
+        if (replay) replay.hidden = false;
+      }
+
+      paseo = function () {
+        apu.unbindTooltip();
+        if (reduceMotion) { llegar(); return; }
+        var el = apu.getElement();
+        if (el) el.classList.add('is-walking');
+        var t0 = null;
+        function frame(ts) {
+          if (!mapa) return;
+          if (t0 === null) t0 = ts;
+          var k = Math.min(1, (ts - t0) / CONFIG.duracionPaseo);
+          var e = k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2; // arranca y frena suave
+          var pos = puntoEn(e * total);
+          apu.setLatLng(pos.p);
+          rastro.setLatLngs(ruta.slice(0, pos.i).concat([pos.p]));
+          if (k < 1) requestAnimationFrame(frame); else llegar();
+        }
+        requestAnimationFrame(frame);
+      };
+
+      // Apu sale cuando el mapa entra en pantalla
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          if (entries[0].isIntersecting) { io.disconnect(); paseo(); }
+        }, { threshold: 0.4 });
+        io.observe(canvas);
+      } else {
+        paseo();
+      }
+    });
   }
+
   function unloadMap() {
-    var box = $('[data-map]');
-    if (!box) return;
-    var iframe = box.querySelector('iframe');
-    if (iframe) iframe.remove();
+    if (mapa) { mapa.remove(); mapa = null; paseo = null; }
     var ph = $('[data-map-placeholder]');
     if (ph) ph.hidden = false;
+    var replay = $('[data-replay]');
+    if (replay) replay.hidden = true;
+  }
+
+  function initReplay() {
+    var b = $('[data-replay]');
+    if (b) b.addEventListener('click', function () { if (paseo) { b.hidden = true; paseo(); } });
+  }
+
+  /* ---------- Menú desplegable ---------- */
+  var seleccionarPasillo = null;
+
+  function initMenu() {
+    var wrap = $('[data-menu]');
+    var btn = $('[data-menu-btn]');
+    var panel = $('[data-menu-panel]');
+    if (!wrap || !btn || !panel) return;
+    var timer = null;
+
+    function abrir() {
+      clearTimeout(timer);
+      panel.hidden = false;
+      void panel.offsetWidth;
+      panel.classList.add('is-open');
+      btn.setAttribute('aria-expanded', 'true');
+      var first = $('a', panel);
+      if (first) first.focus({ preventScroll: true });
+    }
+    function cerrar(devolverFoco) {
+      if (panel.hidden) return;
+      panel.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+      timer = setTimeout(function () { panel.hidden = true; }, reduceMotion ? 0 : 160);
+      if (devolverFoco) btn.focus();
+    }
+
+    btn.addEventListener('click', function () {
+      if (btn.getAttribute('aria-expanded') === 'true') cerrar(); else abrir();
+    });
+    document.addEventListener('click', function (e) { if (!wrap.contains(e.target)) cerrar(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') cerrar(true); });
+    panel.addEventListener('click', function (e) {
+      var a = e.target.closest('a');
+      if (!a) return;
+      var tab = a.getAttribute('data-goto-tab');
+      if (tab && seleccionarPasillo) seleccionarPasillo(tab);
+      cerrar();
+    });
   }
 
   function initConsent() {
@@ -300,7 +451,7 @@
     });
     $$('[data-open-cookies]').forEach(function (btn) { btn.addEventListener('click', show); });
     var loadBtn = $('[data-map-load]');
-    if (loadBtn) loadBtn.addEventListener('click', loadMap);
+    if (loadBtn) loadBtn.addEventListener('click', function () { storageSet(CONFIG.claveConsentimiento, 'accepted'); loadMap(); hide(); });
   }
 
   /* ---------- Cabecera y CTA móvil ---------- */
@@ -364,6 +515,8 @@
     initHours();
     initConsent();
     initHeader();
+    initMenu();
+    initReplay();
     initMobileCta();
     initReveal();
     $$('[data-year]').forEach(function (el) { el.textContent = String(new Date().getFullYear()); });
